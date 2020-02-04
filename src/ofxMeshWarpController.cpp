@@ -43,7 +43,8 @@ void ControllerBase::clear()
 void ControllerBase::draw() const
 {
 	ofPushMatrix();
-	ofTranslate(translation_);
+	auto translation = translation_ - translation_gui_;
+	ofTranslate(translation);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
 	for(auto &mesh : meshes_) {
@@ -55,7 +56,8 @@ void ControllerBase::draw() const
 void ControllerBase::drawFace() const
 {
 	ofPushMatrix();
-	ofTranslate(translation_);
+	auto translation = translation_ - translation_gui_;
+	ofTranslate(translation);
 	ofScale(scale_, scale_);
 	ofTranslate(-anchor_point_);
 	for(auto &mesh : meshes_) {
@@ -116,7 +118,7 @@ bool PointController::isEditing() const
 	return mouse_op_.hover!=nullptr || isGrabbing() || isMakingRect();
 }
 void PointController::mousePressed(ofMouseEventArgs &args)
-{
+{	
 	glm::vec2 local = screenToLocal(args);
 	mouse_op_.pressed_pos = local;
 	mouse_op_.pressed_state = MouseOperation::STATE_NONE;

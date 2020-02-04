@@ -57,7 +57,10 @@ namespace Editor {
 		void setAnchorPoint(const glm::vec2 &point) { anchor_point_ = point; }
 		void setTranslation(float x, float y) { setTranslation(glm::vec2(x,y)); }
 		void setTranslation(const glm::vec2 &point) { translation_ = point; }
+		void setTranslationGui(float x, float y) { setTranslationGui(glm::vec2(x, y)); }
+		void setTranslationGui(const glm::vec2& point) { translation_gui_ = point; }
 		void setScale(float s) { assert(s>0); scale_ = s; }
+		void setScaleGui(float s) { assert(s > 0); scale_gui_ = s; }
 		
 		virtual bool isEditing() const { return false; }
 		
@@ -79,7 +82,9 @@ namespace Editor {
 		
 		glm::vec2 anchor_point_=glm::vec2(0,0);
 		glm::vec2 translation_=glm::vec2(0,0);
+		glm::vec2 translation_gui_=glm::vec2(0, 0);
 		float scale_=1;
+		float scale_gui_=1;
 		glm::vec2 screenToLocal(glm::vec2 src) const { return (src-translation_)/scale_+anchor_point_; }
 		glm::vec2 localToScreen(glm::vec2 src) const { return (src-anchor_point_)*scale_+translation_; }
 	};
